@@ -32,6 +32,13 @@ my_key_right = False
 
 my_car = Car(rect=Rect(200, 200, 10, 10))
 
+my_key_up1 = False
+my_key_down1 = False
+my_key_left1 = False
+my_key_right1 = False
+
+my_car1 = Car(rect=Rect(200, 200, 10, 10))
+my_car1.rect.color = [100, 150, 226]
 while True:
     # 设置fps
     clock.tick(60)
@@ -50,6 +57,15 @@ while True:
             if event.key == pygame.K_RIGHT:
                 my_key_right = True
 
+            if event.key == pygame.K_s:
+                my_key_down1 = True
+            if event.key == pygame.K_w:
+                my_key_up1 = True
+            if event.key == pygame.K_a:
+                my_key_left1 = True
+            if event.key == pygame.K_d:
+                my_key_right1 = True
+
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
                 my_key_down = False
@@ -59,6 +75,15 @@ while True:
                 my_key_left = False
             if event.key == pygame.K_RIGHT:
                 my_key_right = False
+
+            if event.key == pygame.K_s:
+                my_key_down1 = False
+            if event.key == pygame.K_w:
+                my_key_up1 = False
+            if event.key == pygame.K_a:
+                my_key_left1 = False
+            if event.key == pygame.K_d:
+                my_key_right1 = False
 
     if my_key_up == True:
         my_car.change_speed_y(0)
@@ -72,10 +97,24 @@ while True:
     if my_key_right == True:
         my_car.change_speed_x(1)
 
+    if my_key_up1 == True:
+        my_car1.change_speed_y(0)
+
+    if my_key_down1 == True:
+        my_car1.change_speed_y(1)
+
+    if my_key_left1 == True:
+        my_car1.change_speed_x(0)
+
+    if my_key_right1 == True:
+        my_car1.change_speed_x(1)
+
     my_car.stop()
+    my_car1.stop()
 
     game_background.draw(pygame, window)
 
     my_car.move(pygame, window, battlefield)
+    my_car1.move(pygame, window, battlefield)
 
     pygame.display.update()
