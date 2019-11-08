@@ -85,28 +85,28 @@ while True:
             if event.key == pygame.K_d:
                 my_key_right1 = False
 
-    if my_key_up == True:
+    if my_key_up:
         my_car.change_speed_y(0)
 
-    if my_key_down == True:
+    if my_key_down:
         my_car.change_speed_y(1)
 
-    if my_key_left == True:
+    if my_key_left:
         my_car.change_speed_x(0)
 
-    if my_key_right == True:
+    if my_key_right:
         my_car.change_speed_x(1)
 
-    if my_key_up1 == True:
+    if my_key_up1:
         my_car1.change_speed_y(0)
 
-    if my_key_down1 == True:
+    if my_key_down1:
         my_car1.change_speed_y(1)
 
-    if my_key_left1 == True:
+    if my_key_left1:
         my_car1.change_speed_x(0)
 
-    if my_key_right1 == True:
+    if my_key_right1:
         my_car1.change_speed_x(1)
 
     my_car.stop()
