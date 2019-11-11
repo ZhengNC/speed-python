@@ -73,8 +73,8 @@ class Car:
         self.circle.color = [100, 150, 226]
         self.speed_x = math.cos(self.direction.get_direction()*math.pi/180) * self.speed
         self.speed_y = math.sin(self.direction.get_direction()*math.pi/180) * self.speed
-        self.a = 0.2  # 动力（加速度）
-        self.a_s = 0.02  # 阻力（反向加速度）
+        self.a = 0.2  # 动力（加速度，不变的）
+        self.a_s = 0.02  # 阻力（反向加速度，随速度的变化动态变化）
 
     def set_speed_x(self, speed_x):
         self.speed_x = speed_x
