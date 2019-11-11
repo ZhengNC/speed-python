@@ -61,36 +61,36 @@ while True:
 
     game_background.draw(pygame, window)
 
-    # if my_key_right and my_key_down:
-    #     my_car.change_speed(45)
-    # else:
-    #     if my_key_right:
-    #         my_car.change_speed(0)
-    #     if my_key_down:
-    #         my_car.change_speed(90)
-    #
-    # if my_key_right and my_key_up:
-    #     my_car.change_speed(315)
-    # else:
-    #     if my_key_up:
-    #         my_car.change_speed(270)
-    #
-    # if my_key_left and my_key_down:
-    #     my_car.change_speed(135)
-    # else:
-    #     if my_key_left:
-    #         my_car.change_speed(180)
-    #
-    # if my_key_left and my_key_up:
-    #     my_car.change_speed(225)
-    if my_key_right:
-        my_car.change_speed(0)
-    if my_key_left:
-        my_car.change_speed(180)
-    if my_key_up:
-        my_car.change_speed(270)
-    if my_key_down:
-        my_car.change_speed(90)
+    if my_key_right and my_key_down and not my_key_left and not my_key_up:
+        my_car.change_speed(45)
+    else:
+        if my_key_right and not my_key_left and not my_key_up and not my_key_down:
+            my_car.change_speed(0)
+        if my_key_down and not my_key_up and not my_key_left and not my_key_right:
+            my_car.change_speed(90)
+
+    if my_key_right and my_key_up and not my_key_left and not my_key_down:
+        my_car.change_speed(315)
+    else:
+        if my_key_up and not my_key_down and not my_key_left and not my_key_right:
+            my_car.change_speed(270)
+
+    if my_key_left and my_key_down and not my_key_up and not my_key_right:
+        my_car.change_speed(135)
+    else:
+        if my_key_left and not my_key_right and not my_key_up and not  my_key_down:
+            my_car.change_speed(180)
+
+    if my_key_left and my_key_up and not my_key_right and not my_key_down:
+        my_car.change_speed(225)
+    # if my_key_right:
+    #     my_car.change_speed(0)
+    # if my_key_left:
+    #     my_car.change_speed(180)
+    # if my_key_up:
+    #     my_car.change_speed(270)
+    # if my_key_down:
+    #     my_car.change_speed(90)
 
     my_car.stop()
 
