@@ -65,7 +65,7 @@ class Direction:
 
 
 class Car:
-    def __init__(self, circle=Circle(50.0, 50.0, 10.0), speed_max=10.0):
+    def __init__(self, circle=Circle(50.0, 50.0, 10.0)):
         """direction为x轴方向为0度顺时针方向的角度"""
         self.circle = circle
         self.speed = 0
@@ -73,8 +73,8 @@ class Car:
         self.circle.color = [100, 150, 226]
         self.speed_x = math.cos(self.direction.get_direction()*math.pi/180) * self.speed
         self.speed_y = math.sin(self.direction.get_direction()*math.pi/180) * self.speed
-        self.a = 0.0
-        self.speed_max = speed_max
+        self.a = 0.2  # 动力（加速度）
+        self.a_s = 0.02  # 阻力（反向加速度）
 
     def set_speed_x(self, speed_x):
         self.speed_x = speed_x
@@ -92,30 +92,33 @@ class Car:
         self.speed_y = math.sin(self.direction.get_direction()*math.pi/180) * self.speed
 
     def change_speed(self, action_direction):
-        self.a = (1.0 - abs(self.speed)/self.speed_max)/10.0
+        a_r = self.a - self.a_s
         a_x = 0.0
         a_y = 0.0
         if action_direction == 0:
-            a_x = self.a
+            a_x = a_r
         elif action_direction == 90:
-            a_y = self.a
+            a_y = a_r
         elif action_direction == 180:
-            a_x = -self.a
+            a_x = -a_r
         elif action_direction == 270:
-            a_y = -self.a
+            a_y = -a_r
         else:
-            a_x = math.cos(action_direction*math.pi/180) * self.a
-            a_y = math.sin(action_direction*math.pi/180) * self.a
+            a_x = math.cos(action_direction*math.pi/180) * a_r
+            a_y = math.sin(action_direction*math.pi/180) * a_r
         self.set_speed_x(self.speed_x + a_x)
         self.set_speed_y(self.speed_y + a_y)
 
     def stop(self):
-        if self.speed - 0.02 < 0:
+        if self.speed - self.a_s < 0:
             self.set_speed(0)
         else:
-            self.set_speed(self.speed - 0.02)
+            self.set_speed(self.speed - self.a_s)
 
     def move(self, pygame, surface, battlefield):
+        self.a_s = math.pow(self.speed/25, 2)*2
+        if self.a_s < 0.02:
+            self.a_s = 0.02
         self.circle.x += self.speed_x
         self.circle.y += self.speed_y
         in_result = util.circle_in_rect(self.circle, battlefield)
