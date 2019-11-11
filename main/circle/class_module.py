@@ -64,8 +64,6 @@ class Direction:
                 return 0
 
 
-
-
 class Car:
     def __init__(self, circle=Circle(50.0, 50.0, 10.0), speed_max=10.0):
         """direction为x轴方向为0度顺时针方向的角度"""
@@ -126,4 +124,12 @@ class Car:
                 self.set_speed_y(-self.speed_y)
             if in_result == "left" or in_result == "right":
                 self.set_speed_x(-self.speed_x)
+        if self.circle.x - self.circle.r < battlefield.x:
+            self.circle.x = battlefield.x + self.circle.r
+        if self.circle.x + self.circle.r > battlefield.x + battlefield.width:
+            self.circle.x = battlefield.x + battlefield.width - self.circle.r
+        if self.circle.y - self.circle.r < battlefield.y:
+            self.circle.y = battlefield.y + self.circle.r
+        if self.circle.y + self.circle.r > battlefield.y + battlefield.height:
+            self.circle.y = battlefield.y + battlefield.height - self.circle.r
         self.circle.draw(pygame, surface)
