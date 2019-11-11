@@ -1,6 +1,6 @@
 # coding=utf-8
 from sys import exit
-from class_module import Rect, Circle, Car
+from class_module import Rect, Circle, Car, Direction
 
 import pygame
 
@@ -24,10 +24,10 @@ game_background = Rect(0, 0, window.get_width(), window.get_height())
 # 战场区域
 battlefield = Rect(0, 0, window.get_width(), window.get_height())
 
-my_key_up = False
-my_key_down = False
-my_key_left = False
-my_key_right = False
+my_key_up = 0
+my_key_down = 0
+my_key_left = 0
+my_key_right = 0
 
 my_car = Car()
 
@@ -41,48 +41,54 @@ while True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                my_key_down = True
+                my_key_down = 1
             if event.key == pygame.K_UP:
-                my_key_up = True
+                my_key_up = -1
             if event.key == pygame.K_LEFT:
-                my_key_left = True
+                my_key_left = -1
             if event.key == pygame.K_RIGHT:
-                my_key_right = True
+                my_key_right = 1
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
-                my_key_down = False
+                my_key_down = 0
             if event.key == pygame.K_UP:
-                my_key_up = False
+                my_key_up = 0
             if event.key == pygame.K_LEFT:
-                my_key_left = False
+                my_key_left = 0
             if event.key == pygame.K_RIGHT:
-                my_key_right = False
+                my_key_right = 0
 
     game_background.draw(pygame, window)
 
-    if my_key_right and my_key_down and not my_key_left and not my_key_up:
-        my_car.change_speed(45)
-    else:
-        if my_key_right and not my_key_left and not my_key_up and not my_key_down:
-            my_car.change_speed(0)
-        if my_key_down and not my_key_up and not my_key_left and not my_key_right:
-            my_car.change_speed(90)
+    vector_x = my_key_right + my_key_left
+    vector_y = my_key_up + my_key_down
+    if vector_x != 0 or vector_y != 0:
+        action_direction = Direction(vector_x, vector_y)
+        my_car.change_speed(action_direction.get_direction())
 
-    if my_key_right and my_key_up and not my_key_left and not my_key_down:
-        my_car.change_speed(315)
-    else:
-        if my_key_up and not my_key_down and not my_key_left and not my_key_right:
-            my_car.change_speed(270)
-
-    if my_key_left and my_key_down and not my_key_up and not my_key_right:
-        my_car.change_speed(135)
-    else:
-        if my_key_left and not my_key_right and not my_key_up and not  my_key_down:
-            my_car.change_speed(180)
-
-    if my_key_left and my_key_up and not my_key_right and not my_key_down:
-        my_car.change_speed(225)
+    # if my_key_right and my_key_down and not my_key_left and not my_key_up:
+    #     my_car.change_speed(45)
+    # else:
+    #     if my_key_right and not my_key_left and not my_key_up and not my_key_down:
+    #         my_car.change_speed(0)
+    #     if my_key_down and not my_key_up and not my_key_left and not my_key_right:
+    #         my_car.change_speed(90)
+    #
+    # if my_key_right and my_key_up and not my_key_left and not my_key_down:
+    #     my_car.change_speed(315)
+    # else:
+    #     if my_key_up and not my_key_down and not my_key_left and not my_key_right:
+    #         my_car.change_speed(270)
+    #
+    # if my_key_left and my_key_down and not my_key_up and not my_key_right:
+    #     my_car.change_speed(135)
+    # else:
+    #     if my_key_left and not my_key_right and not my_key_up and not  my_key_down:
+    #         my_car.change_speed(180)
+    #
+    # if my_key_left and my_key_up and not my_key_right and not my_key_down:
+    #     my_car.change_speed(225)
     # if my_key_right:
     #     my_car.change_speed(0)
     # if my_key_left:
