@@ -1,9 +1,8 @@
 # coding=utf-8
 from sys import exit
-from class_module import Rect, Car
+from class_module import Rect, Circle, Car
 
 import pygame
-import util
 
 pygame.init()
 
@@ -30,15 +29,8 @@ my_key_down = False
 my_key_left = False
 my_key_right = False
 
-my_car = Car(rect=Rect(200, 200, 10, 10))
+my_car = Car()
 
-my_key_up1 = False
-my_key_down1 = False
-my_key_left1 = False
-my_key_right1 = False
-
-my_car1 = Car(rect=Rect(200, 200, 10, 10))
-my_car1.rect.color = [100, 150, 226]
 while True:
     # 设置fps
     clock.tick(60)
@@ -57,15 +49,6 @@ while True:
             if event.key == pygame.K_RIGHT:
                 my_key_right = True
 
-            if event.key == pygame.K_s:
-                my_key_down1 = True
-            if event.key == pygame.K_w:
-                my_key_up1 = True
-            if event.key == pygame.K_a:
-                my_key_left1 = True
-            if event.key == pygame.K_d:
-                my_key_right1 = True
-
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
                 my_key_down = False
@@ -76,45 +59,41 @@ while True:
             if event.key == pygame.K_RIGHT:
                 my_key_right = False
 
-            if event.key == pygame.K_s:
-                my_key_down1 = False
-            if event.key == pygame.K_w:
-                my_key_up1 = False
-            if event.key == pygame.K_a:
-                my_key_left1 = False
-            if event.key == pygame.K_d:
-                my_key_right1 = False
-
-    if my_key_up:
-        my_car.change_speed_y(0)
-
-    if my_key_down:
-        my_car.change_speed_y(1)
-
-    if my_key_left:
-        my_car.change_speed_x(0)
-
-    if my_key_right:
-        my_car.change_speed_x(1)
-
-    if my_key_up1:
-        my_car1.change_speed_y(0)
-
-    if my_key_down1:
-        my_car1.change_speed_y(1)
-
-    if my_key_left1:
-        my_car1.change_speed_x(0)
-
-    if my_key_right1:
-        my_car1.change_speed_x(1)
-
-    my_car.stop()
-    my_car1.stop()
-
     game_background.draw(pygame, window)
 
+    # if my_key_right and my_key_down:
+    #     my_car.change_speed(45)
+    # else:
+    #     if my_key_right:
+    #         my_car.change_speed(0)
+    #     if my_key_down:
+    #         my_car.change_speed(90)
+    #
+    # if my_key_right and my_key_up:
+    #     my_car.change_speed(315)
+    # else:
+    #     if my_key_up:
+    #         my_car.change_speed(270)
+    #
+    # if my_key_left and my_key_down:
+    #     my_car.change_speed(135)
+    # else:
+    #     if my_key_left:
+    #         my_car.change_speed(180)
+    #
+    # if my_key_left and my_key_up:
+    #     my_car.change_speed(225)
+    if my_key_right:
+        my_car.change_speed(0)
+    if my_key_left:
+        my_car.change_speed(180)
+    if my_key_up:
+        my_car.change_speed(270)
+    if my_key_down:
+        my_car.change_speed(90)
+
+    my_car.stop()
+
     my_car.move(pygame, window, battlefield)
-    my_car1.move(pygame, window, battlefield)
 
     pygame.display.update()
