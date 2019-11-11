@@ -122,11 +122,30 @@ class Car:
         self.circle.x += self.speed_x
         self.circle.y += self.speed_y
         in_result = util.circle_in_rect(self.circle, battlefield)
+        collide_loss = 0.5
         if in_result != "yes":
+            print "碰撞前"
+            print "speed_x  " + str(self.speed_x)
+            print "speed_y  " + str(self.speed_y)
             if in_result == "up" or in_result == "down":
-                self.set_speed_y(-self.speed_y)
+                if abs(self.speed_y) <= collide_loss:
+                    self.set_speed_y(0.0)
+                else:
+                    if self.speed_y > 0:
+                        self.set_speed_y(-(self.speed_y - collide_loss))
+                    else:
+                        self.set_speed_y(-(self.speed_y + collide_loss))
             if in_result == "left" or in_result == "right":
-                self.set_speed_x(-self.speed_x)
+                if abs(self.speed_x) <= collide_loss:
+                    self.set_speed_x(0.0)
+                else:
+                    if self.speed_x > 0:
+                        self.set_speed_x(-(self.speed_x - collide_loss))
+                    else:
+                        self.set_speed_x(-(self.speed_x + collide_loss))
+            print "碰撞后"
+            print "speed_x  " + str(self.speed_x)
+            print "speed_y  " + str(self.speed_y)
         if self.circle.x - self.circle.r < battlefield.x:
             self.circle.x = battlefield.x + self.circle.r
         if self.circle.x + self.circle.r > battlefield.x + battlefield.width:
