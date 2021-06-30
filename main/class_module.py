@@ -76,9 +76,9 @@ class Car:
         in_result = util.rect1_in_rect2_dir(self.rect, battlefield)
         collide_loss = 0.5
         if in_result != "yes":
-            print "碰撞前"
-            print "speed_x  " + str(self.speed_x)
-            print "speed_y  " + str(self.speed_y)
+            print("碰撞前")
+            print("speed_x  " + str(self.speed_x))
+            print("speed_y  " + str(self.speed_y))
             if in_result == "up" or in_result == "down":
                 if abs(self.speed_y) <= collide_loss:
                     self.speed_y = 0.0
@@ -97,9 +97,9 @@ class Car:
                         self.speed_x -= collide_loss
                     else:
                         self.speed_x += collide_loss
-            print "碰撞后"
-            print "speed_x  " + str(self.speed_x)
-            print "speed_y  " + str(self.speed_y)
+            print("碰撞后")
+            print("speed_x  " + str(self.speed_x))
+            print("speed_y  " + str(self.speed_y))
         if self.rect.x < battlefield.x:
             self.rect.x = battlefield.x
         if self.rect.x + self.rect.width > battlefield.x + battlefield.width:
